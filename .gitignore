@@ -5,6 +5,7 @@ test*.py
 /.svn/
 /datas/
 /saves/
+*.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
