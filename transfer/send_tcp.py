@@ -9,19 +9,28 @@ import pickle
 '''
 传输文件'''
 
-# file_path = r"D:\PycharmProjects\deploy_python_01\socket_tcpip\TcpclientTest_file.py"
-src_dir = r"D:\PycharmProjects\deploy_python_01\datas"
+class Send_path():
+    def __init__(self, ip_port, bufsize, src_path):
+        self.ip_port = ip_port
+        self.bufsize = bufsize
+        self.src_path = src_path
 
-bufsize = 1024
-ip_port = ("192.168.1.15", 12355)
-
-src_dir = os.path.abspath(src_dir)
-for roots, dirs, files in os.walk(src_dir):
-    # file_path = os.path.join(roots, files)
-    for file_name in files:
+    def send_path(self):
+        src_path = os.path.abspath(self.src_path)
+        if os.path.isfile(src_path):
+            roots = os.path.dirname(self.src_path)
+            file_name = os.path.basename(self.src_path)
+            self.send_file(roots, file_name, src_path, self.ip_port, self.bufsize)
+        elif os.path.isdir(src_path):
+            for roots, dirs, files in os.walk(src_path):
+                # file_path = os.path.join(roots, files)
+                for file_name in files:
+                    self.send_file(roots, file_name, src_path, self.ip_port, self.bufsize)
+    @staticmethod
+    def send_file(roots, file_name, src_path, ip_port, bufsize):
         file_path = os.path.join(roots, file_name)
         # dir_rel = '\\'.join(os.path.dirname(file_path).split('\\')[1:])
-        dir_rel = os.path.dirname(file_path)[len(src_dir)+1:] # 获取相对文件夹路径
+        dir_rel = os.path.dirname(file_path)[len(src_path) + 1:]  # 获取相对文件夹路径
 
         file_name_ = file_name.encode('utf-8')
         dir_rel_ = dir_rel.encode("utf-8")
@@ -44,3 +53,12 @@ for roots, dirs, files in os.walk(src_dir):
             data1 = tcp_client.recv(bufsize).decode('utf-8')
             print(data1)
         tcp_client.close()
+
+
+if __name__ == '__main__':
+    bufsize = 1024
+    ip_port = ("192.168.1.15", 12355)
+    # src_path = r"D:\PycharmProjects\deploy_python_01\datas"
+    src_path = r"D:\PycharmProjects\deploy_python_01\transfer\strtest.py"
+    s = Send_path(ip_port, bufsize, src_path)
+    s.send_path()

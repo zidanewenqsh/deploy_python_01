@@ -16,6 +16,7 @@ print(len(da))
 f_len = os.path.getsize(img_path)
 # print(f_len)
 bufsize = 1024
+# ip_port = ("192.168.1.35", 12345)
 ip_port = ("192.168.1.35", 12345)
 
 tcp_client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

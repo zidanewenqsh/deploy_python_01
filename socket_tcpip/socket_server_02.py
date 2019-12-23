@@ -14,7 +14,8 @@ while True:
             client_msg=conn.recv(1024) #收消息
             print('client msg: %s' %client_msg)
             conn.send(client_msg.upper()) #发消息
-        except:
+        except Exception as e:
+            print(e)
             break
 
 

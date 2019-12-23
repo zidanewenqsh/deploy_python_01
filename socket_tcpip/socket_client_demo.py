@@ -9,7 +9,7 @@ buffer_size = 1024
 tcp_client = socket(AF_INET, SOCK_STREAM)  # 创建 socket_tcpip 对象
 # host = gethostname()  # 获取本地主机名
 # port = 12345  # 设置端口
-ip_port = ("127.0.0.1", 8080)
+ip_port = ("127.0.0.1", 12300)
 
 tcp_client.connect(ip_port)
 

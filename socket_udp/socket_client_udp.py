@@ -1,5 +1,5 @@
 from socket import *
-ip_port=('127.0.0.1',8080)
+ip_port=('192.168.40.1',8080)
 back_log=5
 buffer_size=1024
 

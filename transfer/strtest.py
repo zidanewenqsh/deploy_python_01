@@ -8,3 +8,4 @@ e = os.path.abspath(d)
 print(e)
 f = b[len(e):]
 print(f)
+print(os.path.isdir(a))
